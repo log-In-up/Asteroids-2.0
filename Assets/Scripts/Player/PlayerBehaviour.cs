@@ -9,39 +9,28 @@ class PlayerBehaviour : MonoBehaviour
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
-
-    }    
+    }
 
     private void OnEnable()
     {
         playerInputActions.Enable();
 
-        playerInputActions.Player.MoveForward.performed += MoveForward;
-        playerInputActions.Player.ShootBullet.performed += ShootBullet;
-        playerInputActions.Player.ShootLaser.performed += ShootLaser;
+        playerInputActions.Player.MoveForward.performed += PlayerMovement.MoveForward;
+        playerInputActions.Player.ShootBullet.performed += PlayerShooting.ShootBullet;
+        playerInputActions.Player.ShootLaser.performed += PlayerShooting.ShootLaser;
+    }
+
+    private void Update()
+    {
+        PlayerMovement.RotatePlayerToMousePoint(transform);
     }
 
     private void OnDisable()
     {
-        playerInputActions.Player.MoveForward.performed -= MoveForward;
-        playerInputActions.Player.ShootBullet.performed -= ShootBullet;
-        playerInputActions.Player.ShootLaser.performed -= ShootLaser;
+        playerInputActions.Player.MoveForward.performed -= PlayerMovement.MoveForward;
+        playerInputActions.Player.ShootBullet.performed -= PlayerShooting.ShootBullet;
+        playerInputActions.Player.ShootLaser.performed -= PlayerShooting.ShootLaser;
 
         playerInputActions.Disable();
-    }
-
-    private void ShootLaser(InputAction.CallbackContext inputAction)
-    {
-        print("I'm shoot laser");
-    }
-
-    private void ShootBullet(InputAction.CallbackContext inputAction)
-    {
-        print("I'm shoot bullet");
-    }
-
-    private void MoveForward(InputAction.CallbackContext inputAction)
-    {
-        print("I'm moving forward.");
     }
 }
