@@ -5,18 +5,20 @@ class PlayerMovement
 {
     private const float ANGLE_OFFSET = 90.0f, xRotationAngle = 0.0f, yRotationAngle = 0.0f;
 
-    public static void MoveForward(InputAction.CallbackContext inputAction)
+    public void MoveForward(Transform player, float movementSpeed)
     {
-        Debug.Log("I'm moving forward.");
+        player.Translate(movementSpeed * Time.deltaTime * Vector2.up);
+
+        Debug.Log("I'm moving");
     }
 
-    public static void RotatePlayerToMousePoint(Transform player)
+    public void RotatePlayerToMousePoint(Transform player, out float rotationAngle)
     {
-        Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(player.position);
-        Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        Vector2 mouseOnScreen = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-        float angle = Mathf.Atan2(positionOnScreen.y - mouseOnScreen.y, positionOnScreen.x - mouseOnScreen.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(player.position.y - mouseOnScreen.y, player.position.x - mouseOnScreen.x) * Mathf.Rad2Deg + ANGLE_OFFSET;
+        rotationAngle = angle;
 
-        player.rotation = Quaternion.Euler(new Vector3(xRotationAngle, yRotationAngle, angle + ANGLE_OFFSET));
+        player.rotation = Quaternion.Euler(new Vector3(xRotationAngle, yRotationAngle, angle));
     }
 }

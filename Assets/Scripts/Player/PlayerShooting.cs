@@ -1,15 +1,14 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 class PlayerShooting
 {
-    public static void ShootLaser(InputAction.CallbackContext inputAction)
+    public void ShootLaser()
     {
         Debug.Log("I'm shoot laser");
     }
 
-    public static void ShootBullet(InputAction.CallbackContext inputAction)
+    public void ShootBullet(GameObject bullet, Transform spawnPosition)
     {
-        Debug.Log("I'm shoot bullet");
+        Object.Instantiate(bullet, spawnPosition.position, spawnPosition.rotation);
     }
 }
