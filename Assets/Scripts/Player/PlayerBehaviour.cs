@@ -15,6 +15,7 @@ class PlayerBehaviour : MonoBehaviour
 
     [Header("Laser settings")]
     [SerializeField, Min(0.0f)] private float laserDistance = 50.0f;
+    [SerializeField, Min(0.0f)] private float showLaserDelay = 0.2f;
     [SerializeField] private Transform laserSpawnPoint = null;
     [SerializeField] private LayerMask whatIsEnemy;
 
@@ -86,7 +87,7 @@ class PlayerBehaviour : MonoBehaviour
 
     private void ShootLaser(InputAction.CallbackContext inputAction)
     {
-        shooting.ShootLaser(laserSpawnPoint, whatIsEnemy, laserDistance);
+        shooting.ShootLaser(laserSpawnPoint, whatIsEnemy, laserDistance, showLaserDelay);
     }
 
     private void MoveForward(InputAction.CallbackContext obj)
