@@ -13,7 +13,7 @@ class EntityCreatorBehaviour : MonoBehaviour
     [SerializeField] private GameObject enemy = null;
 
     [Header("Common spawn settings")]
-    [SerializeField, Range(0.0f, 100.0f)] private float enemySpawnChance = 25.0f;
+    [SerializeField, Range(0.0f, 100.0f)] private float asteroidSpawnChance = 25.0f;
     [SerializeField, Min(0.0f)] private float createDelay = 1.5f;
     [SerializeField] private Transform[] spawnPoints = null;
 
@@ -31,6 +31,6 @@ class EntityCreatorBehaviour : MonoBehaviour
     {
         entityCreator.CreateEntity(asteroid, asteroidLookatPosition, minAngle, maxAngle,
             enemy, player,
-            spawnPoints, createDelay, enemySpawnChance);
+            spawnPoints, createDelay, asteroidSpawnChance);
     }
 }

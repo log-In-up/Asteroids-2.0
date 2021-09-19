@@ -5,26 +5,34 @@ class PlayerShooting
 {
     private Coroutine showLaser = null;
 
-    public void ShootLaser(Transform origin, MonoBehaviour monoBehaviour, LineRenderer line, LayerMask enemy, float laserDistance, float showLaserDelay)
+    private float nextShotTime = 0.0f;
+
+    public void ShootLaser(Transform origin, MonoBehaviour monoBehaviour, LineRenderer line, LayerMask enemy, float laserDistance, float showLaserDelay, float shootingDelay)
     {
-        int positionCount = 2, firstIndex = 0, secondIndex = 1;
-
-        RaycastHit2D[] raycastHits = Physics2D.RaycastAll(origin.position, origin.up, laserDistance, enemy.value);
-
-        if (showLaser != null)
+        if (Time.time > nextShotTime)
         {
-            monoBehaviour.StopCoroutine(showLaser);
-        }
-        showLaser = monoBehaviour.StartCoroutine(ShowAndDisableLaser(line, showLaserDelay));
+            int positionCount = 2, firstIndex = 0, secondIndex = 1;
+            float firstIndexZOffset = -0.01f;
 
-        line.positionCount = positionCount;
+            RaycastHit2D[] raycastHits = Physics2D.RaycastAll(origin.position, origin.up, laserDistance, enemy.value);
 
-        line.SetPosition(firstIndex, new Vector3(origin.position.x, origin.position.y, -0.01f));
-        line.SetPosition(secondIndex, origin.up * laserDistance);
+            if (showLaser != null)
+            {
+                monoBehaviour.StopCoroutine(showLaser);
+            }
+            showLaser = monoBehaviour.StartCoroutine(ShowAndDisableLaser(line, showLaserDelay));
 
-        foreach (RaycastHit2D hit in raycastHits)
-        {
-            Object.Destroy(hit.collider.gameObject);
+            line.positionCount = positionCount;
+
+            line.SetPosition(firstIndex, new Vector3(origin.position.x, origin.position.y, firstIndexZOffset));
+            line.SetPosition(secondIndex, origin.up * laserDistance);
+
+            foreach (RaycastHit2D hit in raycastHits)
+            {
+                Object.Destroy(hit.collider.gameObject);
+            }
+
+            nextShotTime = Time.time + shootingDelay;
         }
     }
 

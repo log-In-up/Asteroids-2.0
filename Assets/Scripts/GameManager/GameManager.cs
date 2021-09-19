@@ -4,8 +4,6 @@ using UnityEngine.Events;
 [DisallowMultipleComponent]
 public class GameManager : MonoBehaviour
 {
-
-
     [HideInInspector] public UnityEvent OnFinishTheGame = null;
 
     private void OnEnable()

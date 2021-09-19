@@ -7,15 +7,13 @@ using TMPro;
 class PlayerBehaviour : MonoBehaviour
 {
     [Header("Player characteristics")]
-    [SerializeField, Min(0.0f)] private float movementSpeed = 5.0f;
+    [SerializeField] private PlayerCharacteristics characteristics = null;
 
     [Header("Bullet settings")]
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private Transform bulletSpawnPoint = null;
 
     [Header("Laser settings")]
-    [SerializeField, Min(0.0f)] private float laserDistance = 50.0f;
-    [SerializeField, Min(0.0f)] private float showLaserDelay = 0.2f;
     [SerializeField] private Transform laserSpawnPoint = null;
     [SerializeField] private LayerMask whatIsEnemy;
 
@@ -88,11 +86,11 @@ class PlayerBehaviour : MonoBehaviour
 
     private void ShootLaser(InputAction.CallbackContext inputAction)
     {
-        shooting.ShootLaser(laserSpawnPoint, this, lineRenderer, whatIsEnemy, laserDistance, showLaserDelay);
+        shooting.ShootLaser(laserSpawnPoint, this, lineRenderer, whatIsEnemy, characteristics.LaserDistance, characteristics.ShowLaserDelay, characteristics.LaserRollbackTime);
     }
 
     private void MoveForward(InputAction.CallbackContext obj)
     {
-        movement.MoveForward(transform, movementSpeed);
+        movement.MoveForward(transform, characteristics.MovementSpeed);
     }
 }

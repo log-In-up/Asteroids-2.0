@@ -311,10 +311,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroid: {fileID: 7546818047060797024, guid: 2be0420b1bbcdfa44bf62bfdc5fa70aa, type: 3}
   asteroidLookatPosition: {fileID: 304026465}
-  minAngle: -10
-  maxAngle: 10
+  minAngle: -25
+  maxAngle: 25
   enemy: {fileID: 2138935771796278324, guid: 2023a52af74d397478d38e8f4eceb0d2, type: 3}
-  enemySpawnChance: 34
+  enemySpawnChance: 99
   createDelay: 1.5
   spawnPoints:
   - {fileID: 1009089745}

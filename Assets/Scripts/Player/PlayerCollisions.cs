@@ -4,7 +4,7 @@ class PlayerCollisions
 {
     public void FinishTheGame()
     {
-        GameManager gameManager = new GameManager();
-        gameManager.OnFinishTheGame.Invoke();
+        //GameManager gameManager = new GameManager();
+        //gameManager.OnFinishTheGame.Invoke();
     }
 }

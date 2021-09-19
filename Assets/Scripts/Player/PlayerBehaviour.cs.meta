@@ -4,9 +4,12 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - characteristics: {fileID: 11400000, guid: 242462485e1cd4f458537678a51bfbdd, type: 2}
   - bullet: {fileID: 9187815839300267465, guid: f90f8c5c1c2710542abcf1f745f56c77, type: 3}
   - bulletSpawnPoint: {instanceID: 0}
+  - laserSpawnPoint: {instanceID: 0}
   - tagManager: {fileID: 11400000, guid: dafa5ca03d089fd46bc75d8119792dba, type: 2}
+  - lineRenderer: {instanceID: 0}
   - playerCoordinates: {instanceID: 0}
   - playerAngle: {instanceID: 0}
   - playerSpeed: {instanceID: 0}

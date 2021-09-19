@@ -3,31 +3,29 @@ using Pathfinding;
 
 class EntityCreator
 {
-    private float nextShot = 0.0f;
+    private float nextSpawnTime = 0.0f;
 
     private const float ONE_HUNDRED_PERCENT = 100.0f, ZERO_PERCENT = 0.0f;
     private const int FIRST_SPAWN_POINT = 0;
 
     public void CreateEntity(GameObject asteroid, Transform asteroidLookAtPosition, float asteroidMinAngle, float asteroidMaxAngle,
-        GameObject enemy, GameObject player, Transform[] spawnPositions, float crateDelay, float chanceToSpawnEnemy)
+        GameObject enemy, GameObject player, Transform[] spawnPositions, float crateDelay, float chanceToSpawnAsteroid)
     {
-        if (Time.time > nextShot)
+        if (Time.time > nextSpawnTime)
         {
             float randomNumber = Random.Range(ZERO_PERCENT, ONE_HUNDRED_PERCENT);
             int randomPosition = Random.Range(FIRST_SPAWN_POINT, spawnPositions.Length);
 
-            if (randomNumber >= chanceToSpawnEnemy)
+            if (randomNumber >= chanceToSpawnAsteroid)
             {
                 CreateEnemy(enemy, spawnPositions[randomPosition], player.transform);
             }
             else
             {
-                float angleOffset = Random.Range(asteroidMinAngle, asteroidMaxAngle);
-
-                CreateAsteroid(asteroid, spawnPositions[randomPosition], asteroidLookAtPosition, angleOffset);
+                CreateAsteroid(asteroid, spawnPositions[randomPosition], asteroidLookAtPosition, asteroidMinAngle, asteroidMaxAngle);
             }
 
-            nextShot = Time.time + crateDelay;
+            nextSpawnTime = Time.time + crateDelay;
         }
     }
 
@@ -37,15 +35,19 @@ class EntityCreator
         enemyEntity.GetComponent<AIDestinationSetter>().target = player;
     }
 
-    private void CreateAsteroid(GameObject asteroid, Transform position, Transform lookAtPoint, float angleOffset)
+    private void CreateAsteroid(GameObject asteroid, Transform position, Transform lookAtPoint, float asteroidMinAngle, float asteroidMaxAngle)
     {
-        float xRotationAngle = 0.0f, yRotationAngle = 0.0f;
+        float xRotationAngle = 0.0f, yRotationAngle = 0.0f, angleRotationOffset = 90.0f;
 
-        float angle = Mathf.Atan2(asteroid.transform.position.y - lookAtPoint.position.y, asteroid.transform.position.x - lookAtPoint.position.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(
+            position.position.y - lookAtPoint.transform.position.y,
+            position.position.x - lookAtPoint.transform.position.x)
+            * Mathf.Rad2Deg + angleRotationOffset;
+
+        float angleOffset = Random.Range(asteroidMinAngle, asteroidMaxAngle);
+
         Quaternion asteroidRotation = Quaternion.Euler(new Vector3(xRotationAngle, yRotationAngle, angle + angleOffset));
 
-        GameObject meteorite = Object.Instantiate(asteroid, position.position, asteroidRotation);
-
-        //meteorite.transform.LookAt(lookAtPoint);
+        Object.Instantiate(asteroid, position.position, asteroidRotation);
     }
 }

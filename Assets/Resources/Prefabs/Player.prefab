@@ -275,10 +275,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c9176377822b94d9c131008164b102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  characteristics: {fileID: 11400000, guid: 242462485e1cd4f458537678a51bfbdd, type: 2}
   bullet: {fileID: 9187815839300267465, guid: f90f8c5c1c2710542abcf1f745f56c77, type: 3}
   bulletSpawnPoint: {fileID: 6740857579949164449}
-  laserDistance: 50
   showLaserDelay: 0.2
   laserSpawnPoint: {fileID: 322694920065237332}
   whatIsEnemy:
