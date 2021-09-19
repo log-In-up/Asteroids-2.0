@@ -2,10 +2,9 @@ using UnityEngine;
 
 class PlayerCollisions
 {
-    private GameManager gameManager = new GameManager();
-
     public void FinishTheGame()
     {
+        GameManager gameManager = new GameManager();
         gameManager.OnFinishTheGame.Invoke();
     }
 }

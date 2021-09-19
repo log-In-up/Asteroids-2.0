@@ -38,7 +38,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7378076175534768832}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -74,7 +74,7 @@ LineRenderer:
   m_SortingOrder: 4
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 1, z: 0}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -279,11 +279,13 @@ MonoBehaviour:
   bullet: {fileID: 9187815839300267465, guid: f90f8c5c1c2710542abcf1f745f56c77, type: 3}
   bulletSpawnPoint: {fileID: 6740857579949164449}
   laserDistance: 50
+  showLaserDelay: 0.2
   laserSpawnPoint: {fileID: 322694920065237332}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
   tagManager: {fileID: 11400000, guid: dafa5ca03d089fd46bc75d8119792dba, type: 2}
+  lineRenderer: {fileID: 6046998564122939295}
   playerCoordinates: {fileID: 0}
   playerAngle: {fileID: 0}
   playerSpeed: {fileID: 0}

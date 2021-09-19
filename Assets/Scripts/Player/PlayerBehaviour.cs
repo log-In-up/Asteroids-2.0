@@ -21,6 +21,7 @@ class PlayerBehaviour : MonoBehaviour
 
     [Header("Other components")]
     [SerializeField] private TagManager tagManager = null;
+    [SerializeField] private LineRenderer lineRenderer = null;
 
     [Header("UI components")]
     [SerializeField] private TextMeshProUGUI playerCoordinates = null;
@@ -87,7 +88,7 @@ class PlayerBehaviour : MonoBehaviour
 
     private void ShootLaser(InputAction.CallbackContext inputAction)
     {
-        shooting.ShootLaser(laserSpawnPoint, whatIsEnemy, laserDistance, showLaserDelay);
+        shooting.ShootLaser(laserSpawnPoint, this, lineRenderer, whatIsEnemy, laserDistance, showLaserDelay);
     }
 
     private void MoveForward(InputAction.CallbackContext obj)

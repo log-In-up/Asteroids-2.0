@@ -1959,14 +1959,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6046998564122939295, guid: 78227db82a957e74d83de04b84fa4d23, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6046998564122939295, guid: 78227db82a957e74d83de04b84fa4d23, type: 3}
-      propertyPath: m_Positions.Array.data[1].y
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 9176458654793144042, guid: 78227db82a957e74d83de04b84fa4d23, type: 3}
       propertyPath: playerAngle
       value: 
