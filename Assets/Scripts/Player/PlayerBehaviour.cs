@@ -9,70 +9,88 @@ class PlayerBehaviour : MonoBehaviour
     [Header("Player characteristics")]
     [SerializeField, Min(0.0f)] private float movementSpeed = 5.0f;
 
-    [Header("Other Components")]
+    [Header("Bullet settings")]
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private Transform bulletSpawnPoint = null;
 
-    [Header("UI Components")]
+    [Header("Laser settings")]
+    [SerializeField, Min(0.0f)] private float laserDistance = 50.0f;
+    [SerializeField] private Transform laserSpawnPoint = null;
+    [SerializeField] private LayerMask whatIsEnemy;
+
+    [Header("Other components")]
+    [SerializeField] private TagManager tagManager = null;
+
+    [Header("UI components")]
     [SerializeField] private TextMeshProUGUI playerCoordinates = null;
     [SerializeField] private TextMeshProUGUI playerAngle = null;
     [SerializeField] private TextMeshProUGUI playerSpeed = null;
 
-    private PlayerInputActions playerInputActions = null;
-    private VisualizePlayerState playerStateVisualizer = null;
-    private PlayerMovement playerMovement = null;
-    private PlayerShooting playerShooting = null;
+    private PlayerInputActions inputActions = null;
+    private VisualizePlayerState stateVisualizer = null;
+    private PlayerMovement movement = null;
+    private PlayerShooting shooting = null;
+    private PlayerCollisions collisions = null;
 
     private void Awake()
     {
-        playerInputActions = new PlayerInputActions();
-        playerMovement = new PlayerMovement();
-        playerShooting = new PlayerShooting();
-        playerStateVisualizer = new VisualizePlayerState();
+        inputActions = new PlayerInputActions();
+        movement = new PlayerMovement();
+        shooting = new PlayerShooting();
+        stateVisualizer = new VisualizePlayerState();
+        collisions = new PlayerCollisions();
     }
 
     private void OnEnable()
     {
-        playerInputActions.Enable();
+        inputActions.Enable();
 
-        playerInputActions.Player.MoveForward.started += MoveForward;
-        playerInputActions.Player.MoveForward.canceled += MoveForward;
+        inputActions.Player.MoveForward.started += MoveForward;
+        inputActions.Player.MoveForward.canceled += MoveForward;
 
-        playerInputActions.Player.ShootBullet.performed += ShootBullet;
-        playerInputActions.Player.ShootLaser.performed += ShootLaser;
+        inputActions.Player.ShootBullet.performed += ShootBullet;
+        inputActions.Player.ShootLaser.performed += ShootLaser;
     }
 
     private void Update()
     {
-        playerMovement.RotatePlayerToMousePoint(transform, out float rotationAngle);
+        movement.RotatePlayerToMousePoint(transform, out float rotationAngle);
 
-        playerStateVisualizer.ShowPlayerAngles(playerAngle, rotationAngle);
-        playerStateVisualizer.ShowPlayerPosition(playerCoordinates, transform);
+        stateVisualizer.ShowPlayerAngles(playerAngle, rotationAngle);
+        stateVisualizer.ShowPlayerPosition(playerCoordinates, transform);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(tagManager.Asteroid) || collision.CompareTag(tagManager.Enemy))
+        {
+            collisions.FinishTheGame();
+        }
     }
 
     private void OnDisable()
     {
-        playerInputActions.Player.MoveForward.started -= MoveForward;
-        playerInputActions.Player.MoveForward.canceled -= MoveForward;
+        inputActions.Player.MoveForward.started -= MoveForward;
+        inputActions.Player.MoveForward.canceled -= MoveForward;
 
-        playerInputActions.Player.ShootBullet.performed -= ShootBullet;
-        playerInputActions.Player.ShootLaser.performed -= ShootLaser;
+        inputActions.Player.ShootBullet.performed -= ShootBullet;
+        inputActions.Player.ShootLaser.performed -= ShootLaser;
 
-        playerInputActions.Disable();
+        inputActions.Disable();
     }
 
     private void ShootBullet(InputAction.CallbackContext inputAction)
     {
-        playerShooting.ShootBullet(bullet, bulletSpawnPoint);
+        shooting.ShootBullet(bullet, bulletSpawnPoint);
     }
 
     private void ShootLaser(InputAction.CallbackContext inputAction)
     {
-        playerShooting.ShootLaser();
+        shooting.ShootLaser(laserSpawnPoint, whatIsEnemy, laserDistance);
     }
 
     private void MoveForward(InputAction.CallbackContext obj)
     {
-        playerMovement.MoveForward(transform, movementSpeed);
+        movement.MoveForward(transform, movementSpeed);
     }
 }

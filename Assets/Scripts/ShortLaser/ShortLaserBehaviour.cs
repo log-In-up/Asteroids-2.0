@@ -1,18 +1,37 @@
 using UnityEngine;
 
-public class ShortLaserBehaviour : MonoBehaviour
+[DisallowMultipleComponent]
+class ShortLaserBehaviour : MonoBehaviour
 {
     [SerializeField, Min(0.0f)] private float movementSpeed = 5.0f;
+    [SerializeField] private TagManager tagManager = null;
 
-    private ShortLaserMovement laserMovement = null;
+    private ShortLaserMovement movement = null;
+    private ShortLaserCollisions collisions = null;
 
     private void Awake()
     {
-        laserMovement = new ShortLaserMovement();
+        movement = new ShortLaserMovement();
+        collisions = new ShortLaserCollisions();
     }
 
     private void Update()
     {
-        laserMovement.MoveForward(transform, movementSpeed);
+        movement.MoveForward(transform, movementSpeed);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag(tagManager.Asteroid))
+        {
+            collisions.HandleCollisionWithAsteroid(collision.gameObject, collision);
+        }
+
+        if(collision.CompareTag(tagManager.Enemy))
+        {
+            collisions.HandleCollisionWithEnemy(collision.gameObject);
+        }
+
+        collisions.DestroyYourself(gameObject);
     }
 }

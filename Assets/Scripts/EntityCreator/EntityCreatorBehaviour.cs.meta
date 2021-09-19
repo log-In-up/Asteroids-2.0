@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 653d860cf38394146ab85490e28bf537
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - asteroid: {fileID: 7546818047060797024, guid: 2be0420b1bbcdfa44bf62bfdc5fa70aa, type: 3}
+  - asteroidLookatPosition: {instanceID: 0}
+  - enemy: {fileID: 2138935771796278324, guid: 2023a52af74d397478d38e8f4eceb0d2, type: 3}
+  - player: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

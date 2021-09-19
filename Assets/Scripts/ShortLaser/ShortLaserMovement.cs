@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ShortLaserMovement
+class ShortLaserMovement
 {
     public void MoveForward(Transform laser, float movementSpeed)
     {

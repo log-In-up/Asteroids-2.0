@@ -3,7 +3,13 @@ guid: d4c9176377822b94d9c131008164b102
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bullet: {fileID: 9187815839300267465, guid: f90f8c5c1c2710542abcf1f745f56c77, type: 3}
+  - bulletSpawnPoint: {instanceID: 0}
+  - tagManager: {fileID: 11400000, guid: dafa5ca03d089fd46bc75d8119792dba, type: 2}
+  - playerCoordinates: {instanceID: 0}
+  - playerAngle: {instanceID: 0}
+  - playerSpeed: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

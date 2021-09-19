@@ -2,7 +2,9 @@
     "name": "ShortLaser",
     "rootNamespace": "",
     "references": [
-        "GUID:b93f844d45cfcc44fa2b0eed5c9ec6bb"
+        "GUID:b93f844d45cfcc44fa2b0eed5c9ec6bb",
+        "GUID:3ab7ebef2e6a157489f47c6896dd751f",
+        "GUID:c9a85070f98168446aeeeaefb41c6510"
     ],
     "includePlatforms": [
         "Editor",
