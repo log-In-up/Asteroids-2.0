@@ -4,33 +4,31 @@ using UnityEngine.InputSystem;
 
 class PlayerMovement
 {
-    private const float ANGLE_OFFSET = 90.0f, xRotationAngle = 0.0f, yRotationAngle = 0.0f;
+    private float moveSpeed = 0.0f;
 
-    private Coroutine movement = null;
+    private const float ANGLE_OFFSET = 90.0f, X_ROTATION_ANGLE = 0.0f, Y_ROTATION_ANGLE = 0.0f, STOPPING_SPEED = 0.0f;
 
-    public void StartMovement(MonoBehaviour monoBehaviour, Transform player, float movementSpeed)
+    private Coroutine movement = null, stopMotion = null;
+
+    public void StartMovement(MonoBehaviour monoBehaviour, float movementSpeed)
     {
+        if(stopMotion != null)
+        {
+            monoBehaviour.StopCoroutine(stopMotion);
+        }
+
         if(movement != null)
         {
             monoBehaviour.StopCoroutine(movement);
         }
-        movement = monoBehaviour.StartCoroutine(Movement(player, movementSpeed));
+        movement = monoBehaviour.StartCoroutine(StartMotion(monoBehaviour.transform, movementSpeed));
     }
 
     public void StopMovement(MonoBehaviour monoBehaviour)
     {
         monoBehaviour.StopCoroutine(movement);
-    }
-
-    private IEnumerator Movement(Transform player, float movementSpeed)
-    {
-        while(true)
-        {
-            player.Translate(movementSpeed * Time.deltaTime * Vector2.up);
-
-            yield return new WaitForEndOfFrame();
-        }
-    }
+        stopMotion = monoBehaviour.StartCoroutine(StopMotion(monoBehaviour.transform));
+    }    
 
     public void RotatePlayerToMousePoint(Transform player, out float rotationAngle)
     {
@@ -39,6 +37,37 @@ class PlayerMovement
         float angle = Mathf.Atan2(player.position.y - mouseOnScreen.y, player.position.x - mouseOnScreen.x) * Mathf.Rad2Deg + ANGLE_OFFSET;
         rotationAngle = angle;
 
-        player.rotation = Quaternion.Euler(new Vector3(xRotationAngle, yRotationAngle, angle));
+        player.rotation = Quaternion.Euler(new Vector3(X_ROTATION_ANGLE, Y_ROTATION_ANGLE, angle));
+    }
+
+    private IEnumerator StartMotion(Transform player, float movementSpeed)
+    {
+        while (moveSpeed < movementSpeed)
+        {
+            moveSpeed += 1.0f * Time.deltaTime;
+
+            player.Translate(moveSpeed * Time.deltaTime * Vector2.up);
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        while (true)
+        {
+            player.Translate(movementSpeed * Time.deltaTime * Vector2.up);
+
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private IEnumerator StopMotion(Transform player)
+    {
+        while (moveSpeed > STOPPING_SPEED)
+        {
+            moveSpeed -= 1.0f * Time.deltaTime;
+
+            player.Translate(moveSpeed * Time.deltaTime * Vector2.up);
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

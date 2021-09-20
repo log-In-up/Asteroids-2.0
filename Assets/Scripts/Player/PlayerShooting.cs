@@ -5,7 +5,7 @@ class PlayerShooting
 {
     private Coroutine showLaser = null, restoreLaserCharge = null;
 
-    private float nextShotTime = 0.0f;
+    private float nextShotTime = 0.0f, nextLaserShotTime = 0.0f;
 
     private float restoreSeconds;
     private int laserCharges, maximumCharges;
@@ -48,7 +48,7 @@ class PlayerShooting
 
     public void ShootLaser(Transform origin, MonoBehaviour monoBehaviour, LineRenderer line, LayerMask enemy, float laserDistance, float showLaserDelay, float shootingDelay)
     {
-        if (Time.time > nextShotTime && LaserÑharges > NONE_OF_CHARGES)
+        if (Time.time > nextLaserShotTime && LaserÑharges > NONE_OF_CHARGES)
         {
             int positionCount = 2, firstIndex = 0, secondIndex = 1;
             float firstIndexZOffset = -0.01f;
@@ -71,14 +71,19 @@ class PlayerShooting
                 Object.Destroy(hit.collider.gameObject);
             }
 
-            nextShotTime = Time.time + shootingDelay;
+            nextLaserShotTime = Time.time + shootingDelay;
             LaserÑharges--;
         }
     }
 
-    public void ShootBullet(GameObject bullet, Transform spawnPosition)
+    public void ShootBullet(GameObject bullet, Transform spawnPosition, float shootingDelay)
     {
-        Object.Instantiate(bullet, spawnPosition.position, spawnPosition.rotation);
+        if (Time.time > nextShotTime)
+        {
+            Object.Instantiate(bullet, spawnPosition.position, spawnPosition.rotation);
+            nextShotTime = Time.time + shootingDelay;
+        }
+
     }
 
     private IEnumerator ShowAndDisableLaser(LineRenderer line, float showLaserDelay)

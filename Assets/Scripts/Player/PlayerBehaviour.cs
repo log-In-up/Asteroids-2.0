@@ -20,6 +20,7 @@ class PlayerBehaviour : MonoBehaviour
     [Header("Other components")]
     [SerializeField] private TagManager tagManager = null;
     [SerializeField] private LineRenderer lineRenderer = null;
+    [SerializeField] private GameManager gameManager = null;
 
     [Header("UI components")]
     [SerializeField] private TextMeshProUGUI playerCoordinates = null;
@@ -75,7 +76,7 @@ class PlayerBehaviour : MonoBehaviour
     {
         if (collision.CompareTag(tagManager.Asteroid) || collision.CompareTag(tagManager.Enemy))
         {
-            collisions.FinishTheGame();
+            collisions.FinishTheGame(gameManager);
         }
     }
 
@@ -92,7 +93,7 @@ class PlayerBehaviour : MonoBehaviour
 
     private void ShootBullet(InputAction.CallbackContext inputAction)
     {
-        shooting.ShootBullet(bullet, bulletSpawnPoint);
+        shooting.ShootBullet(bullet, bulletSpawnPoint, characteristics.ShootBulletDelay);
     }
 
     private void ShootLaser(InputAction.CallbackContext inputAction)
@@ -102,7 +103,7 @@ class PlayerBehaviour : MonoBehaviour
 
     private void StartMovement(InputAction.CallbackContext obj)
     {
-        movement.StartMovement(this, transform, characteristics.MovementSpeed);
+        movement.StartMovement(this, characteristics.MovementSpeed);
     }
 
     private void StopMovement(InputAction.CallbackContext obj)

@@ -278,7 +278,6 @@ MonoBehaviour:
   characteristics: {fileID: 11400000, guid: 242462485e1cd4f458537678a51bfbdd, type: 2}
   bullet: {fileID: 9187815839300267465, guid: f90f8c5c1c2710542abcf1f745f56c77, type: 3}
   bulletSpawnPoint: {fileID: 6740857579949164449}
-  showLaserDelay: 0.2
   laserSpawnPoint: {fileID: 322694920065237332}
   whatIsEnemy:
     serializedVersion: 2
@@ -288,3 +287,5 @@ MonoBehaviour:
   playerCoordinates: {fileID: 0}
   playerAngle: {fileID: 0}
   playerSpeed: {fileID: 0}
+  laserRollbackTime: {fileID: 0}
+  laserCharges: {fileID: 0}
