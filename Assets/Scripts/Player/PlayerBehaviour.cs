@@ -25,6 +25,8 @@ class PlayerBehaviour : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerCoordinates = null;
     [SerializeField] private TextMeshProUGUI playerAngle = null;
     [SerializeField] private TextMeshProUGUI playerSpeed = null;
+    [SerializeField] private TextMeshProUGUI laserRollbackTime = null;
+    [SerializeField] private TextMeshProUGUI laserCharges = null;
 
     private PlayerInputActions inputActions = null;
     private VisualizePlayerState stateVisualizer = null;
@@ -41,12 +43,17 @@ class PlayerBehaviour : MonoBehaviour
         collisions = new PlayerCollisions();
     }
 
+    private void Start()
+    {
+        shooting.SetupLaserCharges(characteristics.LaserShots, characteristics.CurrentLaserShots);
+    }
+
     private void OnEnable()
     {
         inputActions.Enable();
 
-        inputActions.Player.MoveForward.started += MoveForward;
-        inputActions.Player.MoveForward.canceled += MoveForward;
+        inputActions.Player.MoveForward.started += StartMovement;
+        inputActions.Player.MoveForward.canceled += StopMovement;
 
         inputActions.Player.ShootBullet.performed += ShootBullet;
         inputActions.Player.ShootLaser.performed += ShootLaser;
@@ -55,9 +62,13 @@ class PlayerBehaviour : MonoBehaviour
     private void Update()
     {
         movement.RotatePlayerToMousePoint(transform, out float rotationAngle);
+        shooting.CheckLaserCharges(this, characteristics.LaserReloadTime);
 
         stateVisualizer.ShowPlayerAngles(playerAngle, rotationAngle);
         stateVisualizer.ShowPlayerPosition(playerCoordinates, transform);
+        stateVisualizer.ShowPlayerSpeed(playerSpeed, transform);
+        stateVisualizer.ShowLaserChargesCount(laserCharges, shooting.Laser—harges);
+        stateVisualizer.ShowLaserRollbackTime(laserRollbackTime, shooting.LaserRestoreTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,8 +81,8 @@ class PlayerBehaviour : MonoBehaviour
 
     private void OnDisable()
     {
-        inputActions.Player.MoveForward.started -= MoveForward;
-        inputActions.Player.MoveForward.canceled -= MoveForward;
+        inputActions.Player.MoveForward.started -= StartMovement;
+        inputActions.Player.MoveForward.canceled -= StopMovement;
 
         inputActions.Player.ShootBullet.performed -= ShootBullet;
         inputActions.Player.ShootLaser.performed -= ShootLaser;
@@ -89,8 +100,13 @@ class PlayerBehaviour : MonoBehaviour
         shooting.ShootLaser(laserSpawnPoint, this, lineRenderer, whatIsEnemy, characteristics.LaserDistance, characteristics.ShowLaserDelay, characteristics.LaserRollbackTime);
     }
 
-    private void MoveForward(InputAction.CallbackContext obj)
+    private void StartMovement(InputAction.CallbackContext obj)
     {
-        movement.MoveForward(transform, characteristics.MovementSpeed);
+        movement.StartMovement(this, transform, characteristics.MovementSpeed);
+    }
+
+    private void StopMovement(InputAction.CallbackContext obj)
+    {
+        movement.StopMovement(this);
     }
 }

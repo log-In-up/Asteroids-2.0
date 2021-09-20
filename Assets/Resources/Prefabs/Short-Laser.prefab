@@ -135,5 +135,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fedce4e4bed054d8eec499989c5144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 10
   tagManager: {fileID: 11400000, guid: dafa5ca03d089fd46bc75d8119792dba, type: 2}

@@ -16,4 +16,6 @@ MonoBehaviour:
   laserRollbackTime: 2
   laserReloadTime: 5
   laserDistance: 50
+  showLaserDelay: 0.2
   laserShots: 3
+  currentLaserShots: 1

@@ -1,15 +1,35 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
 
 class PlayerMovement
 {
     private const float ANGLE_OFFSET = 90.0f, xRotationAngle = 0.0f, yRotationAngle = 0.0f;
 
-    public void MoveForward(Transform player, float movementSpeed)
-    {
-        player.Translate(movementSpeed * Time.deltaTime * Vector2.up);
+    private Coroutine movement = null;
 
-        Debug.Log("I'm moving");
+    public void StartMovement(MonoBehaviour monoBehaviour, Transform player, float movementSpeed)
+    {
+        if(movement != null)
+        {
+            monoBehaviour.StopCoroutine(movement);
+        }
+        movement = monoBehaviour.StartCoroutine(Movement(player, movementSpeed));
+    }
+
+    public void StopMovement(MonoBehaviour monoBehaviour)
+    {
+        monoBehaviour.StopCoroutine(movement);
+    }
+
+    private IEnumerator Movement(Transform player, float movementSpeed)
+    {
+        while(true)
+        {
+            player.Translate(movementSpeed * Time.deltaTime * Vector2.up);
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void RotatePlayerToMousePoint(Transform player, out float rotationAngle)

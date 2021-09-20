@@ -314,7 +314,7 @@ MonoBehaviour:
   minAngle: -25
   maxAngle: 25
   enemy: {fileID: 2138935771796278324, guid: 2023a52af74d397478d38e8f4eceb0d2, type: 3}
-  enemySpawnChance: 99
+  asteroidSpawnChance: 25
   createDelay: 1.5
   spawnPoints:
   - {fileID: 1009089745}
@@ -1967,6 +1967,14 @@ PrefabInstance:
       propertyPath: playerSpeed
       value: 
       objectReference: {fileID: 2111494548}
+    - target: {fileID: 9176458654793144042, guid: 78227db82a957e74d83de04b84fa4d23, type: 3}
+      propertyPath: laserCharges
+      value: 
+      objectReference: {fileID: 1125496794}
+    - target: {fileID: 9176458654793144042, guid: 78227db82a957e74d83de04b84fa4d23, type: 3}
+      propertyPath: laserRollbackTime
+      value: 
+      objectReference: {fileID: 1495562360}
     - target: {fileID: 9176458654793144042, guid: 78227db82a957e74d83de04b84fa4d23, type: 3}
       propertyPath: playerCoordinates
       value: 
