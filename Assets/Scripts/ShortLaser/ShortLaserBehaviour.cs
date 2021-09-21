@@ -24,14 +24,14 @@ class ShortLaserBehaviour : MonoBehaviour
     {
         if(collision.CompareTag(tagManager.Asteroid))
         {
-            collisions.HandleCollisionWithAsteroid(collision.gameObject, collision);
+            collisions.HandleCollisionWithAsteroid(collision);
         }
 
         if(collision.CompareTag(tagManager.Enemy))
         {
-            collisions.HandleCollisionWithEnemy(collision.gameObject);
+            collisions.HandleCollisionWithEnemy(collision);
         }
 
-        collisions.DestroyYourself(gameObject);
+        collisions.DestroyObject(gameObject);
     }
 }

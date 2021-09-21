@@ -183,8 +183,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
-  far clip plane: 500
+  near clip plane: -1
+  far clip plane: 1
   field of view: 60
   orthographic: 1
   orthographic size: 5
@@ -211,7 +211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -268,6 +268,11 @@ MonoBehaviour:
 --- !u!1 &2064220653 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9176458654793144053, guid: 78227db82a957e74d83de04b84fa4d23, type: 3}
+  m_PrefabInstance: {fileID: 9176458654925022747}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2064220657 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9176458654793144043, guid: 78227db82a957e74d83de04b84fa4d23, type: 3}
   m_PrefabInstance: {fileID: 9176458654925022747}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2111494546 stripped
@@ -415,6 +420,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7552144366737237243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8781270035224802588, guid: 9591df9acba5e30409eed95abf833cb1, type: 3}
+  m_PrefabInstance: {fileID: 7552144366737237240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7552144366737237244 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4023108179540596388, guid: 9591df9acba5e30409eed95abf833cb1, type: 3}
+  m_PrefabInstance: {fileID: 7552144366737237240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7552144366737237245 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9096903599190759570, guid: 9591df9acba5e30409eed95abf833cb1, type: 3}
+  m_PrefabInstance: {fileID: 7552144366737237240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552144366737237243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9176458654925022747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -508,9 +540,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2064220653}
     - target: {fileID: 9216446381438020997, guid: 7165a533a4d1d5245a4ec4771871a978, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2064220657}
+    - target: {fileID: 9216446381438020997, guid: 7165a533a4d1d5245a4ec4771871a978, type: 3}
+      propertyPath: totalScoreInGame
+      value: 
+      objectReference: {fileID: 7552144366737237245}
+    - target: {fileID: 9216446381438020997, guid: 7165a533a4d1d5245a4ec4771871a978, type: 3}
       propertyPath: restartGameButton
       value: 
       objectReference: {fileID: 7552144366737237242}
+    - target: {fileID: 9216446381438020997, guid: 7165a533a4d1d5245a4ec4771871a978, type: 3}
+      propertyPath: totalScoreFailedGame
+      value: 
+      objectReference: {fileID: 7552144366737237244}
     - target: {fileID: 9216446381438020997, guid: 7165a533a4d1d5245a4ec4771871a978, type: 3}
       propertyPath: OnFinishTheGame.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -533,6 +577,10 @@ PrefabInstance:
       objectReference: {fileID: 1225298392}
     - target: {fileID: 9216446381438020997, guid: 7165a533a4d1d5245a4ec4771871a978, type: 3}
       propertyPath: OnFinishTheGame.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 7552144366737237243}
+    - target: {fileID: 9216446381438020997, guid: 7165a533a4d1d5245a4ec4771871a978, type: 3}
+      propertyPath: OnFinishTheGame.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
       objectReference: {fileID: 7552144366737237241}
     - target: {fileID: 9216446381438020998, guid: 7165a533a4d1d5245a4ec4771871a978, type: 3}

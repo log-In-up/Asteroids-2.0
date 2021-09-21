@@ -11,6 +11,7 @@ class PlayerShooting
     private int laserCharges, maximumCharges;
 
     private const float ONE_SECOND = 1.0f, ZERO_SECONDS = 0.0f;
+    private const float STOPPED_TIME = 0.0f;
     private const int NONE_OF_CHARGES = 0;
 
     public int LaserÑharges
@@ -48,7 +49,7 @@ class PlayerShooting
 
     public void ShootLaser(Transform origin, MonoBehaviour monoBehaviour, LineRenderer line, LayerMask enemy, float laserDistance, float showLaserDelay, float shootingDelay)
     {
-        if (Time.time > nextLaserShotTime && LaserÑharges > NONE_OF_CHARGES)
+        if (Time.time > nextLaserShotTime && LaserÑharges > NONE_OF_CHARGES && Time.timeScale != STOPPED_TIME)
         {
             int positionCount = 2, firstIndex = 0, secondIndex = 1;
             float firstIndexZOffset = -0.01f;
@@ -78,7 +79,7 @@ class PlayerShooting
 
     public void ShootBullet(GameObject bullet, Transform spawnPosition, float shootingDelay)
     {
-        if (Time.time > nextShotTime)
+        if (Time.time > nextShotTime && Time.timeScale != STOPPED_TIME)
         {
             Object.Instantiate(bullet, spawnPosition.position, spawnPosition.rotation);
             nextShotTime = Time.time + shootingDelay;

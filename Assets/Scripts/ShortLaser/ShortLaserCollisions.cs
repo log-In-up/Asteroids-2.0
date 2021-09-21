@@ -2,23 +2,28 @@ using UnityEngine;
 
 class ShortLaserCollisions
 {
-    public void HandleCollisionWithAsteroid(GameObject asteroid, Collider2D collision)
+    public void HandleCollisionWithAsteroid(Collider2D collision)
     {
-        if (collision.TryGetComponent(out AsteroidBehaviour component))
+        if (collision.TryGetComponent(out Asteroid asteroid))
         {
-            component.OnHit.Invoke();
+            asteroid.OnHit.Invoke();
         }
 
-        Object.Destroy(asteroid);
+        DestroyObject(collision.gameObject);
     }
 
-    public void HandleCollisionWithEnemy(GameObject enemy)
+    public void HandleCollisionWithEnemy(Collider2D collision)
     {
-        Object.Destroy(enemy);
+        if (collision.TryGetComponent(out EnemyBehaviour enemyBehaviour))
+        {
+            enemyBehaviour.OnHit.Invoke();
+        }
+
+        DestroyObject(collision.gameObject);
     }
 
-    public void DestroyYourself(GameObject laser)
+    public void DestroyObject(GameObject gameObj)
     {
-        Object.Destroy(laser);
+        Object.Destroy(gameObj);
     }
 }

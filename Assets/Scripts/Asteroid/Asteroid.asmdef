@@ -2,7 +2,9 @@
     "name": "Asteroid",
     "rootNamespace": "",
     "references": [
-        "GUID:b93f844d45cfcc44fa2b0eed5c9ec6bb"
+        "GUID:b93f844d45cfcc44fa2b0eed5c9ec6bb",
+        "GUID:a2047165994df7844a4fc5007d354889",
+        "GUID:0488a9c914cee1e4ca2efc09b6dc9ac0"
     ],
     "includePlatforms": [
         "Editor",

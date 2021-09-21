@@ -1,11 +1,9 @@
 {
-    "name": "ShortLaser",
+    "name": "Enemy",
     "rootNamespace": "",
     "references": [
         "GUID:b93f844d45cfcc44fa2b0eed5c9ec6bb",
-        "GUID:3ab7ebef2e6a157489f47c6896dd751f",
-        "GUID:c9a85070f98168446aeeeaefb41c6510",
-        "GUID:3929ff8367ebcee498ca94ea712b5cfe"
+        "GUID:a2047165994df7844a4fc5007d354889"
     ],
     "includePlatforms": [
         "Editor",
